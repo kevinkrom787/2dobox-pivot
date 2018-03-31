@@ -15,7 +15,17 @@ function createIdea() {
   bodyInput.value='';
 }
   
-
+function prependIdea(bottomSection, article) {
+ bottomSection.prepend(article);
+ article.innerHTML = (`
+   <article class="idea-title-article" id=${Date.now()}>
+   <h2>${titleInput.value}</h2>
+   <div class="idea-body-article">
+   <h3>${bodyInput.value}</h3>
+   <p>quality: </p>
+   <hr id='idea-underline'>
+   </article>`);
+}
 
 
 // function searchIdea() {
