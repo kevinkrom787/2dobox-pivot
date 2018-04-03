@@ -1,33 +1,59 @@
-var titleInput = document.querySelector('.title-input');
-var bodyInput = document.querySelector('.body-input');
-var saveBtn = document.querySelector('.save-button');
-var topSection = document.querySelector('.top-section');
-var bottomSection = document.querySelector('.bottom-section');
-var searchInput = document.querySelector('.search-input');
-saveBtn.addEventListener('click', createIdea);
+function getIdeas(card) {
+var foo = JSON.parse(localStorage.getItem(card.id));
+debugger;
+};
 
+getIdeas();
+
+$titleInput = $('.title-input');
+$bodyInput = $('.body-input');
+$saveBtn = $('.save-button');
+$topSection = $('.top-section');
+$bottomSection = $('.bottom-section');
+$searchInput = $('.search-input');
+$deleteBtn = $
+
+$saveBtn.on('click', createIdea);
+var cards = [];
 function createIdea() {
   event.preventDefault();
-  var idea=document.createElement('article');
-  idea.setAttribute('class', 'idea-body');
-  prependIdea(bottomSection, idea);
-  titleInput.value = '';
-  bodyInput.value='';
+  var card = new Card($titleInput.val(),  $bodyInput.val());
+  var stringifyCard = JSON.stringify(card);
+  localStorage.setItem(card.id, stringifyCard);
+
+  cards.push(card);
+  prependIdea(card);
+ 
 }
   
-function prependIdea(bottomSection, article) {
- bottomSection.prepend(article);
- article.innerHTML = (`
-   <article class="idea-title-article" id=${Date.now()}>
-   <h2>${titleInput.value}</h2>
+function Card(title, body, id, quality) {
+    this.title = title;
+    this.body = body;
+    this.id = Date.now();
+    this.quality = 'swill';
+}
+
+function prependIdea(card) {
+  console.log(card)
+ $bottomSection.prepend (`
+   <article class="idea-title-article" id=${card.id}>
+   <h2>${card.title}</h2>
    <div class="idea-body-article">
-   <h3>${bodyInput.value}</h3>
-   <p>quality: </p>
+   <h3>${card.body}</h3>
+   <p>quality: ${card.quality} </p>
    <hr id='idea-underline'>
    </article>`);
 }
 
+// function prependIdea(event) {
+//   // event.preventDefault();
+//   var card = new Card($titleInput.val(),  $bodyInput.val())
+
+//   var stringifyCard = JSON.stringify(card);
+//   localStorage.setItem(card.id, stringifyCard);
+// }
 
 // function searchIdea() {
 
 // }
+
