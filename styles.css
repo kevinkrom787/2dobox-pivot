@@ -68,7 +68,7 @@ h1 {
 #idea-underline {
   margin-right: 34%;
 }
-.idea-title-article {
+.idea-card {
   margin-left: 31%;
 }
 
@@ -76,6 +76,22 @@ h1 {
   background-color: #045E55;
 
 }
+
+.upvote-button:hover {
+  content: url(icons/upvote-hover.svg);
+}
+
+.downvote-button:hover {
+  content: url(icons/downvote-hover.svg);
+}
+
+.delete-button:hover {
+  content: url(icons/delete-hover.svg);
+}
+
+/*.upvote-button:hover {
+  src='upvote-hover.svg'
+}*/
 
 h2{
   color: #6D6E71;
