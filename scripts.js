@@ -49,14 +49,12 @@ function Card(title, body, id, quality) {
 function prependIdea(card) {
  $bottomSection.prepend (`
    <article class="idea-card" id=${card.id}>
-   <h2 contenteditable>${card.title}</h2>
-   <div class="idea-body-article">
-   <h3 contenteditable>${card.body}</h3>
-   <p id='quality'>quality: ${card.quality} </p>
+   <h2 contenteditable>${card.title}</h2
    <img src = 'icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
    <img src = 'icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
    <img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
    <hr id='idea-underline'>
+   
    </article>`);
 }
 
@@ -109,4 +107,3 @@ function deleteCard() {
   deleteCard.remove();
   localStorage.removeItem(cardId);
 
-}
