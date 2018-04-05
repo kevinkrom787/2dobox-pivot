@@ -55,10 +55,16 @@ h1 {
   font-size: 15px;
 }
 
+#idea-underline {
+  margin-right: 34%;
+}
+.idea-card {
+  margin-left: 31%;
+}
+
 .save-button:hover {
   background-color: #045E55;
 }
-
 
 .idea-card {
   margin-left: 31%;
@@ -72,6 +78,24 @@ p {
  }
 
  h2 {
+
+.upvote-button:hover {
+  content: url(icons/upvote-hover.svg);
+}
+
+.downvote-button:hover {
+  content: url(icons/downvote-hover.svg);
+}
+
+.delete-button:hover {
+  content: url(icons/delete-hover.svg);
+}
+
+/*.upvote-button:hover {
+  src='upvote-hover.svg'
+}*/
+
+h2{
   color: #6D6E71;
 }
 
