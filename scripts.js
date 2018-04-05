@@ -17,168 +17,96 @@ $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 
 function createIdea() {
-  var card = new Card($titleInput.val(), $bodyInput.val());
-  prependIdea(card);
-  storeIdea(card);
-  $('.title-input').val('');
-  $('.body-input').val('');
-var cards = [];
-
-
-
-$saveBtn.on('click', createIdea);
-$bottomSection.on('click', '.delete-button', deleteCard);
-$bottomSection.on('click', '.upvote-button', increaseQuality);
-$bottomSection.on('click', '.downvote-button', decreaseQuality);
-
-
-function getIdeas() {
-  for (var i=0; i < localStorage.length; i++) {
-    // console.log(i, localStorage, localStorage.key(i))
-    var stored = localStorage.getItem(localStorage.key(i))
-    console.log(stored, 'stored')
-    var parsedCard = JSON.parse(stored); 
-    console.log('parsed', parsedCard);
-    prependIdea(parsedCard);
-  }
-};
-
-getIdeas();
-
-function createIdea() {
-  event.preventDefault();
-  var card = new Card($titleInput.val(),  $bodyInput.val());
-  cards.push(card);
-  prependIdea(card);
-  storeIdea(card);
- 
+ var card = new Card($titleInput.val(), $bodyInput.val());
+ prependIdea(card);
+ storeIdea(card);
+ $('.title-input').val('');
+ $('.body-input').val('');
 }
 
 function getIdeas() {
-  for (var i=0; i < localStorage.length; i++) {
-    var stored = localStorage.getItem(localStorage.key(i))
-    var parsedCard = JSON.parse(stored); 
-    prependIdea(parsedCard);
-  }
+ for (var i=0; i < localStorage.length; i++) {
+   var stored = localStorage.getItem(localStorage.key(i))
+   var parsedCard = JSON.parse(stored);
+   prependIdea(parsedCard);
+ }
 };
 
 getIdeas();
-  
+ 
 function Card(title, body) {
-  this.title = title;
-  this.body = body;
-  this.id = Date.now();
-  this.quality = 'swill';
+ this.title = title;
+ this.body = body;
+ this.id = Date.now();
+ this.quality = 'swill';
 }
 
 function prependIdea(card) {
-
 $bottomSection.prepend (`
- <article class="idea-card" id=${card.id}>
- <img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
-  <h2 class='idea-title' contenteditable>${card.title}</h2>
-  <h3 class='idea-body' contenteditable>${card.body}</h3>
-  <img src = 'icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
-  <img src = 'icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
-  <p>quality:</p>
-  <p id ='quality'> ${card.quality}</p>
-  <hr id='idea-underline'>
- </article>`);
+<article class="idea-card" id=${card.id}>
+<img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
+ <h2 class='idea-title' contenteditable>${card.title}</h2>
+ <h3 class='idea-body' contenteditable>${card.body}</h3>
+ <img src = 'icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
+ <img src = 'icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
+ <p>quality:</p>
+ <p id ='quality'> ${card.quality}</p>
+ <hr id='idea-underline'>
+</article>`);
 }
- 
+
 function storeIdea(card) {
-  var stringifyCard = JSON.stringify(card);
-  localStorage.setItem(card.id, stringifyCard);
+ var stringifyCard = JSON.stringify(card);
+ localStorage.setItem(card.id, stringifyCard);
 }
 
 function editTitle() {
-  var currentCard = $(this).closest('.idea-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.title = $(this).text();
-  storeIdea(parsedCard);
+ var currentCard = $(this).closest('.idea-card');
+ var cardId = currentCard.attr('id');
+ var parsedCard = JSON.parse(localStorage.getItem(cardId));
+ parsedCard.title = $(this).text();
+ storeIdea(parsedCard);
 }
 
 function editBody() {
-  var currentCard = $(this).closest('.idea-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.body = $(this).text();
-  storeIdea(parsedCard);
+ var currentCard = $(this).closest('.idea-card');
+ var cardId = currentCard.attr('id');
+ var parsedCard = JSON.parse(localStorage.getItem(cardId));
+ parsedCard.body = $(this).text();
+ storeIdea(parsedCard);
 }
 
 function storeQuality(cardId, qualityValue) {
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.quality = qualityValue;
-  storeIdea(parsedCard);
+ var parsedCard = JSON.parse(localStorage.getItem(cardId));
+ parsedCard.quality = qualityValue;
+ storeIdea(parsedCard);
 }
 
 function increaseQuality() {
- var upQualityID = $(this).parent().find('#quality');
-  var cardId = upQualityID.parent().attr('id');
-  if (upQualityID.text() === ' swill') {
-   upQualityID.text(' plausible');
- } else if (upQualityID.text() === ' plausible') {
-     upQualityID.text(' genius');
- }
- storeQuality(cardId, upQualityID.text())
+var upQualityID = $(this).parent().find('#quality');
+ var cardId = upQualityID.parent().attr('id');
+ if (upQualityID.text() === ' swill') {
+  upQualityID.text(' plausible');
+} else if (upQualityID.text() === ' plausible') {
+    upQualityID.text(' genius');
 }
-
- $bottomSection.prepend (`
-   <article class="idea-card" id=${card.id}>
-   <h2 contenteditable>${card.title}</h2
-   <img src = 'icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
-   <img src = 'icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
-   <img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
-   <hr id='idea-underline'>
-   
-   </article>`);
-}
-
-function storeIdea(card) {
-  var stringifyCard = JSON.stringify(card);
-  localStorage.setItem(card.id, stringifyCard);
+storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
- var downQualityID = $(this).parent().find('#quality');
- var cardId = downQualityID.parent().attr('id');
- if (downQualityID.text() === ' genius') {
-   downQualityID.text(' plausible');
- } else if (downQualityID.text() === ' plausible') {
-   downQualityID.text(' swill');
- }
-  storeQuality(cardId, downQualityID.text());
+var downQualityID = $(this).parent().find('#quality');
+var cardId = downQualityID.parent().attr('id');
+if (downQualityID.text() === ' genius') {
+  downQualityID.text(' plausible');
+} else if (downQualityID.text() === ' plausible') {
+  downQualityID.text(' swill');
+}
+ storeQuality(cardId, downQualityID.text());
 }
 
 function deleteCard() {
-  var deleteCard = $(this).closest('.idea-card');
-  var cardId = deleteCard.attr('id');
-  deleteCard.remove();
-  localStorage.removeItem(cardId);
+ var deleteCard = $(this).closest('.idea-card');
+ var cardId = deleteCard.attr('id');
+ deleteCard.remove();
+ localStorage.removeItem(cardId);
 }
-
-function decreaseQuality() {
-  var decreaseQuality = $(this).closest('.idea-card');
-  var cardId = decreaseQuality.attr('id');
-  decreaseQuality.quality.innerHTML = "quality: plausible";
-  quality.innerText = "quality: swill";
-  console.log('decrease')
-}
-
-function increaseQuality() {
-  var increaseQuality = $(this).closest('.idea-card');
-  var cardId = increaseQuality.attr('id');
-  quality.innerText = "quality: plausible";
-  quality.innerText = "quality: genius";
-  console.log('quality')
-}
-
-function deleteCard() {
-  var deleteCard = $(this).closest('.idea-card');
-  var cardId = deleteCard.attr('id');
-  console.log(deleteCard);
-  console.log(cardId);
-  deleteCard.remove();
-  localStorage.removeItem(cardId);
-
