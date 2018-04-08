@@ -1,13 +1,11 @@
-$titleInput = $('.title-input');
-$bodyInput = $('.body-input');
+(function() {
 $saveBtn = $('.save-button');
-$topSection = $('.top-section');
 $bottomSection = $('.bottom-section');
 $searchInput = $('.search-input');
 $deleteBtn = $('.delete-button');
 $upvoteBtn = $('.upvote-button')
 $downvoteBtn = $('.downvote-button')
-$taskTitle = $('.task-title');
+})();
 
 $saveBtn.on('click', createTask);
 $bottomSection.on('click', '.delete-button', deleteCard);
@@ -17,6 +15,9 @@ $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 
 function createTask() {
+  $titleInput = $('.title-input');
+  $bodyInput = $('.body-input');
+  $saveBtn = $('.save-button');
   var card = new Card($titleInput.val(), $bodyInput.val());
   prependIdea(card);
   storeIdea(card);
@@ -24,6 +25,8 @@ function createTask() {
 }
 
 function clearInputs() {
+  $titleInput = $('.title-input');
+  $bodyInput = $('.body-input');
   $('.title-input').val('');
   $('.body-input').val('');
 }
@@ -117,8 +120,8 @@ function deleteCard() {
  localStorage.removeItem(cardId);
 }
 
-function disableSave() {
-  if ($titleInput.val === '' || $bodyInput.val === '') {
-    $saveButton.setAttribute()
-  }
-} 
+// function disableSave() {
+//   if ($titleInput.val === '' || $bodyInput.val === '') {
+//     $saveButton.setAttribute()
+//   }
+// } 
