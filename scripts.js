@@ -7,16 +7,16 @@ $searchInput = $('.search-input');
 $deleteBtn = $('.delete-button');
 $upvoteBtn = $('.upvote-button')
 $downvoteBtn = $('.downvote-button')
-$ideaTitle = $('.idea-title');
+$taskTitle = $('.task-title');
 
-$saveBtn.on('click', createIdea);
+$saveBtn.on('click', createTask);
 $bottomSection.on('click', '.delete-button', deleteCard);
 $bottomSection.on('blur', '.idea-title', editTitle);
 $bottomSection.on('blur', '.idea-body', editBody);
 $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 
-function createIdea() {
+function createTask() {
   var card = new Card($titleInput.val(), $bodyInput.val());
   prependIdea(card);
   storeIdea(card);
@@ -49,8 +49,8 @@ function prependIdea(card) {
 $bottomSection.prepend (`
 <article class="idea-card" id=${card.id}>
 <img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
- <h2 class='idea-title' contenteditable>${card.title}</h2>
- <h3 class='idea-body' contenteditable>${card.body}</h3>
+ <h2 class='task-title' contenteditable>${card.title}</h2>
+ <h3 class='task-body' contenteditable>${card.body}</h3>
  <img src ='icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
  <img src ='icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
  <p>quality:</p>
@@ -117,3 +117,8 @@ function deleteCard() {
  localStorage.removeItem(cardId);
 }
 
+function disableSave() {
+  if ($titleInput.val === '' || $bodyInput.val === '') {
+    $saveButton.setAttribute()
+  }
+} 
