@@ -51,8 +51,8 @@ $bottomSection.prepend (`
 <img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
  <h2 class='idea-title' contenteditable>${card.title}</h2>
  <h3 class='idea-body' contenteditable>${card.body}</h3>
- <img src = 'icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
- <img src = 'icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
+ <img src ='icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
+ <img src ='icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
  <p>quality:</p>
  <p id ='quality'> ${card.quality}</p>
  <hr id='idea-underline'>
@@ -98,6 +98,7 @@ storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
+  console.log(downQualityID)
 var downQualityID = $(this).parent().find('#quality');
 var cardId = downQualityID.parent().attr('id');
 if (downQualityID.text() === ' genius') {
@@ -115,3 +116,4 @@ function deleteCard() {
  deleteCard.remove();
  localStorage.removeItem(cardId);
 }
+
