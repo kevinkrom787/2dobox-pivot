@@ -17,11 +17,15 @@ $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 
 function createIdea() {
- var card = new Card($titleInput.val(), $bodyInput.val());
- prependIdea(card);
- storeIdea(card);
- $('.title-input').val('');
- $('.body-input').val('');
+  var card = new Card($titleInput.val(), $bodyInput.val());
+  prependIdea(card);
+  storeIdea(card);
+  clearInputs();
+}
+
+function clearInputs() {
+  $('.title-input').val('');
+  $('.body-input').val('');
 }
 
 function getIdeas() {
@@ -105,6 +109,7 @@ if (downQualityID.text() === ' genius') {
 }
 
 function deleteCard() {
+  console.log(this)
  var deleteCard = $(this).closest('.idea-card');
  var cardId = deleteCard.attr('id');
  deleteCard.remove();
