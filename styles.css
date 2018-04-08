@@ -69,10 +69,12 @@ p {
 
 h2 {
  color: #6D6E71;
+ width: 60%;
 }
 
 h3 {
  color: #939598;
+ width: 60%;
 }
 
 .delete-button {
