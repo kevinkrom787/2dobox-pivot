@@ -48,11 +48,11 @@ function Card(title, body) {
 function prependIdea(card) {
 $bottomSection.prepend (`
 <article class="idea-card" id=${card.id}>
-<img src = 'icons/delete.svg' class='delete-button' width='20px' height='20px'>
+<img src ='icons/delete.svg' alt='delete-button' class='delete-button' width='20px' height='20px'>
  <h2 class='task-title' contenteditable>${card.title}</h2>
  <h3 class='task-body' contenteditable>${card.body}</h3>
- <img src ='icons/upvote.svg' class='upvote-button' width="20px" height='20px'>
- <img src ='icons/downvote.svg' class='downvote-button' width='20px' height='20px'>
+ <img src ='icons/upvote.svg' alt='upvote-button' class='upvote-button' width="20px" height='20px'>
+ <img src ='icons/downvote.svg' alt='downvote-button' class='downvote-button' width='20px' height='20px'>
  <p>quality:</p>
  <p id ='quality'> ${card.quality}</p>
  <hr id='idea-underline'>
