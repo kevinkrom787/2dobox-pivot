@@ -1,11 +1,11 @@
-(function() {
+
 $saveBtn = $('.save-button');
 $bottomSection = $('.bottom-section');
 $searchInput = $('.search-input');
 $deleteBtn = $('.delete-button');
 $upvoteBtn = $('.upvote-button')
 $downvoteBtn = $('.downvote-button')
-})();
+
 
 $saveBtn.on('click', createTask);
 $bottomSection.on('click', '.delete-button', deleteCard);
@@ -13,6 +13,9 @@ $bottomSection.on('blur', '.idea-title', editTitle);
 $bottomSection.on('blur', '.idea-body', editBody);
 $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
+$searchInput.on('keyup', filterIdeas);
+
+
 
 function createTask() {
   $titleInput = $('.title-input');
@@ -120,8 +123,17 @@ function deleteCard() {
  localStorage.removeItem(cardId);
 }
 
-// function disableSave() {
-//   if ($titleInput.val === '' || $bodyInput.val === '') {
-//     $saveButton.setAttribute()
-//   }
-// } 
+function filterIdeas() {
+    $searchInput = $('.search-input').val().toUpperCase();
+    $taskTitle = $('.task-title');
+    $taskBody = $('.task-body');
+
+    for (var i = 0; i < $taskTitle.length; i++ ){
+        if ($($taskTitle[i]).text().toUpperCase().includes($searchInput) || $($taskBody[i]).text().toUpperCase().includes($searchInput)) {
+          $($taskTitle[i]).parent().css('display', 'block');
+        } else {
+          $($taskTitle[i]).parent().css('display', 'none');
+        }
+
+    };
+  }
