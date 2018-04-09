@@ -9,8 +9,8 @@ $downvoteBtn = $('.downvote-button')
 
 $saveBtn.on('click', createTask);
 $bottomSection.on('click', '.delete-button', deleteCard);
-$bottomSection.on('blur', '.idea-title', editTitle);
-$bottomSection.on('blur', '.idea-body', editBody);
+$bottomSection.on('blur', '.task-title', editTitle);
+$bottomSection.on('keydown blur', '.task-body', editBody);
 $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 $searchInput.on('keyup', filterIdeas);
@@ -70,19 +70,40 @@ function storeIdea(card) {
  localStorage.setItem(card.id, stringifyCard);
 }
 
-function editTitle() {
- var currentCard = $(this).closest('.idea-card');
- var cardId = currentCard.attr('id');
- var parsedCard = JSON.parse(localStorage.getItem(cardId));
- parsedCard.title = $(this).text();
- storeIdea(parsedCard);
+// function editTitle() {
+//   debugger;
+//  var currentCard = $(this).closest('.idea-card');
+//  var cardId = currentCard.attr('id');
+//  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+//  parsedCard.title = $(this).text();
+//  storeIdea(parsedCard);
+// }
+
+function editTitle(card) {
+  var key = $(this).parent()[0].id;
+  var currentTask = $(this).closest('.task-title');
+  // getCard(key(date.now));
+  var stringifiedTask = JSON.stringify(currentTask);
+  localStorage.setItem(card.id, stringifiedTask);
+  // update card with userInput
+  // put back into localStorage with storeIdea
 }
 
+// get item from localStorate with ID
+// function getCard(id) {
+  // pull something out of localStorage based on id/key
+  // store nonUpdated card in variable
+
+
+
+
 function editBody() {
+  console.log('thios')
  var currentCard = $(this).closest('.idea-card');
  var cardId = currentCard.attr('id');
  var parsedCard = JSON.parse(localStorage.getItem(cardId));
  parsedCard.body = $(this).text();
+ console.log(parsedCard);
  storeIdea(parsedCard);
 }
 
@@ -127,13 +148,11 @@ function filterIdeas() {
     $searchInput = $('.search-input').val().toUpperCase();
     $taskTitle = $('.task-title');
     $taskBody = $('.task-body');
-
     for (var i = 0; i < $taskTitle.length; i++ ){
         if ($($taskTitle[i]).text().toUpperCase().includes($searchInput) || $($taskBody[i]).text().toUpperCase().includes($searchInput)) {
           $($taskTitle[i]).parent().css('display', 'block');
         } else {
           $($taskTitle[i]).parent().css('display', 'none');
         }
-
     };
   }
