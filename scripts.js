@@ -55,10 +55,11 @@ function getIdeas() {
 getIdeas();
  
 function Card(title, body) {
+
   this.title = title;
   this.body = body;
   this.id = Date.now();
-  this.quality = 'swill';
+  this.quality = 'normal';
   this.complete = false;
 }
 
@@ -110,26 +111,34 @@ function storeQuality(cardId, qualityValue) {
 }
 
 function increaseQuality() {
-  var upQualityID = $(this).parent().find('#quality');
-  var cardId = upQualityID.parent().attr('id');
-     if (upQualityID.text() === ' swill') {
-      upQualityID.text(' plausible');
-    } else if (upQualityID.text() === ' plausible') {
-        upQualityID.text(' genius');
-    }
-    storeQuality(cardId, upQualityID.text())
+var upQualityID = $(this).parent().find('#quality');
+ var cardId = upQualityID.parent().attr('id');
+ if (upQualityID.text() === ' normal') {
+  upQualityID.text(' high');
+} else if (upQualityID.text() === ' high') {
+    upQualityID.text(' critical');
+} else if (upQualityID.text() === ' none ') {
+    upQualityID.text(' low');
+}  else if (upQualityID.text() === ' low') {
+    upQualityID.text(' normal');
   }
+storeQuality(cardId, upQualityID.text())
+}
 
 function decreaseQuality() {
-  var downQualityID = $(this).parent().find('#quality');
-  var cardId = downQualityID.parent().attr('id');
-  if (downQualityID.text() === ' genius') {
-    downQualityID.text(' plausible');
-  } else if (downQualityID.text() === ' plausible') {
-    downQualityID.text(' swill');
-  }
-   storeQuality(cardId, downQualityID.text());
-  }
+var downQualityID = $(this).parent().find('#quality');
+var cardId = downQualityID.parent().attr('id');
+if (downQualityID.text() === ' normal') {
+  downQualityID.text(' low');
+} else if (downQualityID.text() === ' low') {
+  downQualityID.text(' none');
+} else if (downQualityID.text() === ' critical') {
+  downQualityID.text(' high');
+} else if (downQualityID.text() === ' high') {
+  downQualityID.text(' normal');
+}
+ storeQuality(cardId, downQualityID.text());
+}
 
 function deleteCard() {
  var deleteCard = $(this).closest('.idea-card');
