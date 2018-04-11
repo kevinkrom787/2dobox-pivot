@@ -47,8 +47,10 @@ getIdeas();
 function Card(title, body) {
  this.title = title;
  this.body = body;
- this.id = Date.now();
- this.quality = 'swill';
+ this.id = Date.now() || id;
+ // this.qualityPosition = 2;
+ this.quality = 'normal';
+ // ['critical', 'high', 'normal', 'low', 'none'];
 }
 
 function prependIdea(card) {
@@ -70,14 +72,6 @@ function storeIdea(card) {
  localStorage.setItem(card.id, stringifyCard);
 }
 
-// function editTitle() {
-//   debugger;
-//  var currentCard = $(this).closest('.idea-card');
-//  var cardId = currentCard.attr('id');
-//  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-//  parsedCard.title = $(this).text();
-//  storeIdea(parsedCard);
-// }
 
 function editTitle(card) {
   var key = $(this).parent()[0].id;
@@ -116,23 +110,31 @@ function storeQuality(cardId, qualityValue) {
 function increaseQuality() {
 var upQualityID = $(this).parent().find('#quality');
  var cardId = upQualityID.parent().attr('id');
- if (upQualityID.text() === ' swill') {
-  upQualityID.text(' plausible');
-} else if (upQualityID.text() === ' plausible') {
-    upQualityID.text(' genius');
+ if (upQualityID.text() === 'none') {
+  upQualityID.text('low');
+} else if (upQualityID.text() === ' low') {
+    upQualityID.text('normal');  
+} else if (upQualityID.text() === ' normal') {
+    upQualityID.text('high');
+} else if (upQualityID.text() === ' high') {
+    upQualityID.text('critical');
 }
 storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
-  console.log(downQualityID)
+  // debugger;
 var downQualityID = $(this).parent().find('#quality');
 var cardId = downQualityID.parent().attr('id');
-if (downQualityID.text() === ' genius') {
-  downQualityID.text(' plausible');
-} else if (downQualityID.text() === ' plausible') {
-  downQualityID.text(' swill');
-}
+if (downQualityID.text() === ' critical') {
+  downQualityID.text('high');
+} else if (downQualityID.text() === ' high') {
+  downQualityID.text('normal');
+} else if (downQualityID.text() === ' normal') {
+  downQualityID.text('low');
+} else if (downQualityID.text() === ' low') {
+  downQualityID.text('none');
+} 
  storeQuality(cardId, downQualityID.text());
 }
 
