@@ -3,18 +3,14 @@ $(document).ready(function() {
   disableButton()
 })
 
-
 $('.save-button').on('click', createTask);
 $('.save-button').on('click', disableButton);
-
 $('.bottom-section').on('click', '.delete-button', deleteCard);
 $('.bottom-section').on('blur', '.task-title', editTitle);
 $('.bottom-section').on('keydown blur', '.task-body', editBody);
 $('.bottom-section').on('click', '.upvote-button', increaseQuality);
 $('.bottom-section').on('click', '.downvote-button', decreaseQuality);
-$('.search-input').on('keyup', filterIdeas);
-
-
+$('.search-input').on('keyup', filterTasks);
 
 function disableButton() {
         $('.title-input, .body-input').keyup(function () {
@@ -31,8 +27,8 @@ function createTask() {
   $bodyInput = $('.body-input');
   $saveBtn = $('.save-button');
   var card = new Card($titleInput.val(), $bodyInput.val());
-  prependIdea(card);
-  storeIdea(card);
+  prependTask(card);
+  storeTask(card);
   clearInputs();
 }
 
@@ -43,19 +39,17 @@ function clearInputs() {
   $('.body-input').val('');
 }
 
-function getIdeas() {
+function getTasks() {
  for (var i=0; i < localStorage.length; i++) {
    var stored = localStorage.getItem(localStorage.key(i))
    var parsedCard = JSON.parse(stored);
-   prependIdea(parsedCard);
-   // hideCompleteTasks(parsedCard);
+   prependTask(parsedCard);
  }
 };
 
-getIdeas();
- 
+getTasks();
+  
 function Card(title, body) {
-
   this.title = title;
   this.body = body;
   this.id = Date.now();
@@ -63,13 +57,13 @@ function Card(title, body) {
   this.complete = false;
 }
 
-function prependIdea(card) {
+function prependTask(card) {
   var completedClass = ''
    if (card.complete === true) {
     completedClass = 'task-done';
   }
   $('.bottom-section').prepend (`
-    <article class="idea-card" id=${card.id}>
+    <article class="task-card" id=${card.id}>
      <img src ='icons/delete.svg' alt='delete-button' class='delete-button' width='20px' height='20px'>
      <h2 class='task-title' contenteditable>${card.title}</h2>
      <h3 class='task-body' contenteditable>${card.body}</h3>
@@ -78,36 +72,36 @@ function prependIdea(card) {
      <p>quality:</p>
      <p id ='quality'> ${card.quality}</p>
      <button class='complete-button ${completedClass}'>Completed Task</button>
-     <hr id='idea-underline'>
+     <hr id='task-underline'>
     </article>`);
 
   }
 
-function storeIdea(card) {
+function storeTask(card) {
   var stringifyCard = JSON.stringify(card);
   localStorage.setItem(card.id, stringifyCard);
 }
 
 function editTitle(card) {
-  var currentCard = $(this).closest('.idea-card');
+  var currentCard = $(this).closest('.task-card');
   var cardId = currentCard.attr('id');
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
   parsedCard.title = $(this).text();
-  storeIdea(parsedCard);
+  storeTask(parsedCard);
 }
 
 function editBody(card) {
-  var currentCard = $(this).closest('.idea-card');
+  var currentCard = $(this).closest('.task-card');
   var cardId = currentCard.attr('id');
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
   parsedCard.body = $(this).text();
-  storeIdea(parsedCard);
+  storeTask(parsedCard);
 }
 
 function storeQuality(cardId, qualityValue) {
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
   parsedCard.quality = qualityValue;
-  storeIdea(parsedCard);
+  storeTask(parsedCard);
 }
 
 function increaseQuality() {
@@ -141,42 +135,39 @@ if (downQualityID.text() === ' normal') {
 }
 
 function deleteCard() {
- var deleteCard = $(this).closest('.idea-card');
+ var deleteCard = $(this).closest('.task-card');
  var cardId = deleteCard.attr('id');
  deleteCard.remove();
  localStorage.removeItem(cardId);
 }
 
-function filterIdeas() {
-    $searchInput = $('.search-input').val().toUpperCase();
-    $taskTitle = $('.task-title');
-    $taskBody = $('.task-body');
-    for (var i = 0; i < $taskTitle.length; i++ ){
-        if ($($taskTitle[i]).text().toUpperCase().includes($searchInput) || $($taskBody[i]).text().toUpperCase().includes($searchInput)) {
-          $($taskTitle[i]).parent().css('display', 'block');
-        } else {
-          $($taskTitle[i]).parent().css('display', 'none');
-        }
-    };
-  }
+function filterTasks() {
+  $searchInput = $('.search-input').val().toUpperCase();
+  $taskTitle = $('.task-title');
+  $taskBody = $('.task-body');
+  for (var i = 0; i < $taskTitle.length; i++ ){
+      if ($($taskTitle[i]).text().toUpperCase().includes($searchInput) || $($taskBody[i]).text().toUpperCase().includes($searchInput)) {
+        $($taskTitle[i]).parent().css('display', 'block');
+      } else {
+        $($taskTitle[i]).parent().css('display', 'none');
+      }
+  };
+}
 
 $('.bottom-section').on('click', '.complete-button', markAsComplete);
 
 function markAsComplete(card) {
-  var currentCard = $(this).closest('.idea-card');
+  var currentCard = $(this).closest('.task-card');
   var cardId = currentCard.attr('id');
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  // $complete = $('.complete-button');
   $(this).toggleClass('task-done')
   if (parsedCard.complete === false) {
     parsedCard.complete = true;
     } else {
       parsedCard.complete = false;
     }
-  storeIdea(parsedCard);
+  storeTask(parsedCard);
 }
-
-
 
 $(document).ready(hideCompleteTasks);
 

@@ -1,147 +1,184 @@
- background-color: #E5F3F2;
- height: 300px;
- align-content: center;
- font-family: open sans;
+body {
+  margin: auto;
+}
+
+.top-section {
+  align-content: center;
+  background-color: #E5F3F2;
+  font-family: open sans;
+  height: 300px;
 }
 
 .middle-section {
- align-content: center;
- background-color: #FFFFFF;
+  align-content: center;
+  background-color: #FFFFFF;
 }
 
 span {
- color:#6D6E71;
- display: inline-block;
- font-size: 30px;
- font-family: roboto slab, serif;
- margin: 0 0 0 10%;
+  color:#6D6E71;
+  font-size: 30px;
+  font-family: roboto slab, serif;
+  margin: 0 0 0 6vw;
 }
 
 header {
- margin-left: 43%;
- color: #6D6E71;
-
+  margin-left: 43%;
+  color: #6D6E71;
 }
 
 h1 {
- color: #00A79D;
- font-size: 30px;
- display: inline-block;
- font-family: roboto slab, serif;
- margin-top: 13px;
+  color: #00A79D;
+  display: inline-block;
+  font-size: 30px;
+  font-family: roboto slab, serif;
+  margin-top: 13px;
 }
 
 .inputs {
- width: 44%;
- margin-left: 31%;
- height: 30px;
- margin-top: 24px;
- margin-bottom: 0;
- font-size: 18px;
+  font-size: 18px;
+  height: 30px;
+  margin-bottom: 0;
+  margin-left: 31%;
+  margin-top: 24px;
+  width: 44%;
 }
 
 .title-input {
 }
 
 .save-button {
- height: 30px;
- width: 44.3%;
- margin-top: 40px;
- margin-left: 31%;
- background-color: #00A79D;
- color: #FFFFFF;
- font-size: 15px;
+  background-color: #00A79D;
+  color: #FFFFFF;
+  font-size: 15px;
+  height: 30px;
+  margin-left: 31%;
+  margin-top: 40px;
+  width: 44.3%;
+}
+
+.complete-button {
+  background-color: #00A79D;
+  border-radius: 5%;
+  color: white;
+  height: 25px;
+  margin-left: 33%;
+  width: 10vw;
 }
 
 .save-button:hover {
- background-color: #045E55;
+  background-color: #045E55;
 }
 
-.idea-card {
- margin-left: 31%;
+.task-card {
+  margin-left: 31%;
 }
 
 p {
- display: inline-block;
- font-size: 18px;
- color: #939598;
+  color: #939598;
+  display: inline-block;
+  font-size: 18px;
 }
 
 h2 {
- color: #6D6E71;
- width: 60%;
+  color: #6D6E71;
+  width: 60%;
 }
 
 h3 {
- color: #939598;
- width: 60%;
+  color: #939598;
+  width: 60%;
 }
 
 .delete-button {
- float: right;
- margin-right: 32%;
+  float: right;
+  margin-right: 35%;
 }
 
 .delete-button:hover {
- content: url(icons/delete-hover.svg);
+  content: url(icons/delete-hover.svg);
 }
 
 .upvote-button:hover {
- content: url(icons/upvote-hover.svg);
+  content: url(icons/upvote-hover.svg);
 }
 
 .downvote-button:hover {
- content: url(icons/downvote-hover.svg);
+  content: url(icons/downvote-hover.svg);
 }
 
-#idea-underline {
- margin-right: 34%;
+#task-underline {
+  margin-right: 34%;
 }
 
 ::placeholder {
- font-size: 20px;
- padding-bottom: 5px;
+  font-size: 20px;
+  padding-bottom: 5px;
 }
 
 .task-done {
+  background-color: gray;
+  color: white;
   text-decoration: line-through;
 }
 
 @media screen and (max-width: 615px) {
 
 .inputs {
- width: 80%;
- margin-left: 10%;
+  margin-left: 10%;
+  width: 80%;
 }
 
 .title-input {
- margin-top: -30px;
+  margin-top: -30px;
 }
 
 .body-input {
- height: 70px;
+  height: 70px;
 }
 
 .save-button {
- width: 80%;
- margin-left: 10%;
  font-size: 15px;
-}
-
-.idea-card {
  margin-left: 10%;
+ width: 80%;
 }
 
-#idea-underline {
- margin-right: 10%;
+.task-card {
+  margin-left: 10%;
+}
+
+#task-underline {
+  margin-right: 10%;
 }
 
 .save-button {
- margin-left: 10%;
+  margin-left: 10%;
 }
 
 .delete-button {
- margin-right: 10%;
+  margin-right: 10%;
 }
 
+span {
+  margin: 0 0 0 0;
+}
+
+.complete-button {
+  margin-left: 40%;
+  width: 16vw;
+}
+
+}
+
+@media screen and (max-width: 1100px) {
+  .complete-button {
+  font-size: .5em;
+  margin-left: 29%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .complete-button {
+  font-size: .5em;
+  margin-left: 13%;
+  }
 }
